@@ -23,6 +23,11 @@ class CupcakeList {
         this.cupcakes.push(addedCupcake);
         return addedCupcake;
     }
+
+    async deleteCupcake(cupcakeID) {
+        const response = await axios.delete(`${BASE_URL}/api/cupcakes/${cupcakeID}`);
+        return response;
+    }
 }
 
 class Cupcake {

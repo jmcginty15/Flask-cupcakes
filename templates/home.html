@@ -16,6 +16,26 @@
             <h3 class="card-title">Cupcakes:</h3>
             <ul class="card-text" id="cupcake-list"></ul>
         </div>
+        <div class="card-body">
+            <hr>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">Add a new cupcake:</h3>
+            <h6 class="asterisk"><small>* denotes required fields</small></h6>
+        </div>
+        <div class="card-body">
+            <form action="/add" method="POST" id="add-cupcake-form" class="card-body">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                <div class="form-group">
+                    {{ field.label }} {% if field.flags.required %}<b class="asterisk">*</b>{% endif %}
+                    {{ field(class_="form-control") }}
+                    {% for err in field.errors %}<small class="form-text text-muted">{{ err }}</small>{% endfor %}
+                </div>
+                {% endfor %}
+                <button type="submit" id="submit-form" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

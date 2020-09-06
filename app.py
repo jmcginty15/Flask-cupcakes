@@ -3,6 +3,7 @@
 from flask import Flask, request, render_template, redirect, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Cupcake
+from forms import AddCupcakeForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
@@ -18,7 +19,8 @@ db.create_all()
 @app.route('/')
 def show_list():
     """Display home page"""
-    return render_template('home.html')
+    form = AddCupcakeForm()
+    return render_template('home.html', form=form)
 
 @app.route('/api/cupcakes')
 def all_cupcakes():
@@ -46,7 +48,6 @@ def new_cupcake():
         new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating, image=image)
     except:
         new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating)
-    # print(new_cupcake, flush=True)
     db.session.add(new_cupcake)
     db.session.commit()
     serialized_cupcake = {'cupcake': new_cupcake.serialize()}

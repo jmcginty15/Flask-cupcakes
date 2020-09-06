@@ -26,7 +26,17 @@ class CupcakeList {
 
     async deleteCupcake(cupcakeID) {
         const response = await axios.delete(`${BASE_URL}/api/cupcakes/${cupcakeID}`);
-        return response;
+        return response.data.message;
+    }
+
+    async getCupcake(cupcakeID) {
+        const response = await axios.get(`${BASE_URL}/api/cupcakes/${cupcakeID}`);
+        return response.data.cupcake;
+    }
+
+    async editCupcake(cupcakeID, newCupcake) {
+        const response = await axios.patch(`${BASE_URL}/api/cupcakes/${cupcakeID}`, newCupcake);
+        return response.data.cupcake;
     }
 }
 

@@ -5,3 +5,7 @@
 .asterisk {
     color: red;
 }
+
+.submit-edit-form, .cancel-edit {
+    color: white;
+}
